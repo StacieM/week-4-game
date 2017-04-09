@@ -10,26 +10,26 @@ $(document).ready(function() {
 		choices = [];
 		enemyArray = [ {
 			id: 0,
-			name: "Hufflepuff",
-			pic: 'assets/images/hufflepuff.jpg',
+			name: "Korath",
+			pic: 'assets/images/korath.jpeg',
 			hitPoints: 150,
 			attackPower: 5
 		}, {
 			id: 1,
-			name: "Gryffindor",
-			pic: 'assets/images/gryffindor.png',
+			name: "Drax",
+			pic: 'assets/images/drax.jpeg',
 			hitPoints: 100,
 			attackPower: 25 		
 		}, {
 			id: 2,
-			name: "Slytherin",
-			pic: 'assets/images/slytherin.png',
+			name: "Ronan",
+			pic: 'assets/images/ronan.jpeg',
 			hitPoints: 120,
 			attackPower: 19 
 		}, {
 			id: 3,
-			name: "Ravenclaw",
-			pic: 'assets/images/ravenclaw.png',
+			name: "Starlord",
+			pic: 'assets/images/starlord.jpeg',
 			hitPoints: 140,
 			attackPower: 9 
 		} ];
@@ -46,7 +46,7 @@ $(document).ready(function() {
 		}
 
 		$("#picking").html(choices);
-		$("#todo").html("Click to choose your house");
+		$("#todo").html("Click to choose your character");
 
 		$('.hero').remove();
 		$('.fighting').remove();
@@ -99,7 +99,7 @@ $(document).ready(function() {
 
 	$('#attack').on("click", function() {
 		if(!haveCharacter) {
-			$('#whathappens').html("You need to pick your house first!");
+			$('#whathappens').html("You need to pick your attacker first!");
 		}
 		else if(!haveAttacker) {
 			$('#whathappens').html("Pick who you are fighting!");
@@ -120,7 +120,7 @@ $(document).ready(function() {
 				}
 				else {
 					whatHappens();
-					alert("You win the house cup!  Play again!");
+					alert("You win!  Play again!");
 					wins++;
 					$('#winsloses').html("Overall Wins: " + wins + "&nbsp;&nbsp;Loses: " + loses);
 					varSet();
@@ -129,7 +129,7 @@ $(document).ready(function() {
 			}
 			else if(enemyArray[myChar].hitPoints < 0) {
 				whatHappens();
-				alert("Your house has been defeated!  Try again!");
+				alert("You have been defeated!  Try again!");
 				loses++;
 				$('#winsloses').html("Overall Wins: " + wins + "&nbsp;&nbsp;Loses: " + loses);
 				varSet();

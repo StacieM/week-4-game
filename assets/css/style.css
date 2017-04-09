@@ -1,26 +1,16 @@
 body {
-	background-image: url(../images/hp_background.jpg);
+	background-image: url(../images/guardiansofgalaxy.jpeg);
 	background-size: cover;
 
 }
 
 @font-face {
-	font-family: 'HP';
-	src: url(../ParryHotter.ttf) format('truetype');
-}
-
-@font-face {
-	font-family: 'Parsel';
-	src: url(../parsel.ttf) format('truetype');
-}
-
-@font-face {
-	font-family: 'Lumos';
-	src: url(../WizardsMagic.ttf) format('truetype');
+	font-family: ______;
+	src: url(../________) format('truetype');
 }
 
 h1 {
-	font-family: 'HP';
+	font-family: _____;
 	float: left;
 	color: #FFBC4F;
 	font-size: 50px;
@@ -30,7 +20,7 @@ h1 {
 }
 
 h2 {
-	font-family: 'Lumos';
+	font-family: ______;
 }
 
 .houses {
@@ -89,5 +79,4 @@ h2 {
 	margin-right: 50px;
 	margin-top: 20px;
 	padding: 20px;
-
 }
