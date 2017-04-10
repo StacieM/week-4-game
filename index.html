@@ -1,38 +1,107 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Guardians of the Galaxy RPG</title>
+  <meta charset="UTF-8">
+  <title>Guardians of the Galaxy RPG</title>
 
-    <script src="https://code.jquery.com/jquery-2.2.3.js" integrity="sha256-laXWtGydpwqJ8JA+X9x2miwmaiKhn8tVmOVEigRNtP4=" crossorigin="anonymous"></script>
+  <!-- Link to the jQuery Library -->
+  <script src="https://code.jquery.com/jquery-2.2.3.js" integrity="sha256-laXWtGydpwqJ8JA+X9x2miwmaiKhn8tVmOVEigRNtP4=" crossorigin="anonymous"></script>
 
+   <!-- Link to the Bootstrap library -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 
-    <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
-
+  <!-- Link to an additional CSS file -->
+  <link rel="stylesheet" href="practicerpg.css">
+  <link href="https://fonts.googleapis.com/css?family=Bungee" rel="stylesheet">
 </head>
-<body>
-<div class="container-fluid">
-<h1>Guardians of the Galaxy<br>&nbsp;&nbsp;&nbsp;&nbsp;Duel</h1>
-<div id="winsloses" class="text-center">Overall Wins: 0 &nbsp;&nbsp;Loses: 0</div>
-    <div class="row">
-        <h2 id="todo" class="text-center"></h2>
-        <div id="picking" class="text-center"></div>
-    </div>
-    <div class="row theCenter text-center">
-        <div id="myguy" class="col-md-4"></div>
-        <div class="col-md-4">
-            <button id="attack" type="button" class="btn btn-danger" value=attack>Attack</button><br><br>
-            <button id="restart" type="button" class="btn btn-info" value=restart>Restart</button><br><br>
-            <div id="whathappens"></div><br>
-        </div>
-        <div id="enemy" class="col-md-4"></div>
-    </div>
-</div>
 
-<script src="assets/javascript/game.js" type="text/javascript">
-</script>
+<body>
+
+  <!-- Overall Bootstrap grid -->
+  <div class="container">
+
+    <!-- Jumbotron with title -->
+   <!--  <div class="jumbotron"> -->
+
+      <h1 class="text-center"><strong>Guardians of the Galaxy RPG</strong></h1>
+      <h2 class="text-center">Choose Your Character</h2>
+
+   <!--  </div>  --><!-- End Jumbotron -->
+
+    <!-- Contents of the game-->
+    <div class="row">
+
+      <!-- Available characters -->
+      <div class="col-lg-12" id="characters-available">
+        <div class="col-md-3 col-sm-6">
+        <div class="character-image available-character" id="korath-character">
+          <p>Korath</p>
+          <img src="korath.jpeg" alt="Korath Character" id="korath-image" style="width: 200px; height: 100px;">
+          <p class="health">120</p>
+        </div>
+        </div>
+
+        <div class="col-md-3 col-sm-6">
+        <div class="character-image available-character" id="starlord-character">
+          <p>Starlord</p>
+          <img src="starlord.jpeg" alt="Starlord Character" id="starlord-image" style="width: 200px; height: 100px;">
+          <p class="health">100</p>
+        </div>
+        </div>
+
+       
+        <div class="col-md-3 col-sm-6">
+        <div class="character-image available-character" id="ronan-character">
+          <p>Ronan</p>
+          <img src="ronan.jpeg" alt="Ronan" id="ronan-image" style="width: 200px; height: 100px;">
+          <p class="health">150</p>
+        </div>
+        </div>
+
+
+        <div class="col-md-3 col-sm-6">
+        <div class="character-image available-character" id="drax-character">
+          <p>Drax</p>
+          <img src="drax.jpeg" alt="Drax Character" id="drax-image" style="width: 200px; height: 100px;">
+          <p class="health">180</p>
+        </div>
+        </div>
+      </div> <!-- End available characters -->
+
+      <!-- Your chosen character -->
+      <div class="col-lg-12" id="chosen-character">
+        <h2>Your Character</h2> <!-- doesn't appear until character is selected -->
+      </div> <!-- End your chosen character-->
+
+      <!-- Enemies available to attack -->
+      <div class="col-lg-12" id="enemies-available">
+        <h2>Enemies Available To Attack</h2>
+      </div> <!-- End enemies available to attack -->
+
+      <!-- Fight section --> <!-- dont have until all have been chosen -->
+      <div class="col-lg-12" id="fight-section">
+        <h2>Fight Section</h2>
+        <button id="attack">Attack</button>
+      </div> <!-- End fight section -->
+
+      <!-- Defender section -->
+      <div class="col-lg-12" id="defender-section">
+        <h2>Defender</h2>
+      </div> <!-- End defender section -->
+
+      <!-- calculate wins and losses and play song for wins -->
+
+      <!-- Game message section -->
+      <div class="col-lg-12" id="message-section">
+        <div id="game-message"></div>
+        <button id="restart">Restart</button>
+      </div> <!-- Game message section -->
+
+    </div> <!-- End contents of the game -->
+
+  </div> <!-- End Bootstrap grid -->
+
+  <script type="text/javascript" src="practicerpg.js"></script>
 
 </body>
 </html>

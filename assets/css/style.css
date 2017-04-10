@@ -1,82 +1,87 @@
 body {
-	background-image: url(../images/guardiansofgalaxy.jpeg);
-	background-size: cover;
-
-}
-
-@font-face {
-	font-family: ______;
-	src: url(../________) format('truetype');
+	font-family: 'Bungee';
+	background-image: url('guardiansofgalaxy.jpeg');
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;	
 }
 
 h1 {
-	font-family: _____;
-	float: left;
-	color: #FFBC4F;
-	font-size: 50px;
-	margin: 20px;
-	line-height: 150%;
-	opacity: 0.7;
+	color: #e68a00;
+	text-shadow: 3px 2px black;
 }
 
 h2 {
-	font-family: ______;
+	color: black;
+	text-shadow: 2px 1px #e68a00;
 }
 
-.houses {
-	width: 80px;
+.character-image {
+	display: inline-block;
+  	height: 145px;
+	padding: 0px 20px 0px 20px;
+	margin: 0px 2px 0px 2px;
+	background-color: white;
+	border: solid;
+	border-color: #e68a00;
 }
 
-.character {
-	border-style: solid;
+.character-image p {
+	text-align: center;
+	margin: 0px 2px 0px 2px;
+}
+
+#chosen-character {
+	height: 190px;
+}
+
+#chosen-character h2 {
+	font-size: 2em;
+    color: black;
+    text-shadow: 2px 1px #e68a00;
+}
+
+.chosen-character {
 	border-color: black;
-	background-color: #FFFBDE;
-	font-family: serif;
+	background-color: #FFFFFF;
 }
 
-.hero {
-	background-color: #FFF880;
+#enemies-available h2 {
+	font-size: 2em;
+    color: black;
 }
 
-.fighting {
-	background-color: #FF534F;
+.enemy-character {
+	border-color: black;
+	background-color: #aff048;
+	margin: 0px 2px 0px 2px;
+	color: black;
 }
 
-#picking {
-	opacity: 0.7;
-	background-color: #99b4c7;
-	width: 550px;
-	height: 250px;
-	margin: 0 auto;
-	padding: 30px;
+#fight-section h2 {
+	font-size: 2em;
+    color: black;
 }
 
-.theCenter {
-	margin: 0 auto;
-	padding: 30px;
+#defender-section {
+	height: 210px;
 }
 
-#attack {
-	font-family: 'Lumos';
-	font-size: 24px;
+#defender-section h2 {
+	font-size: 2em;
+	color: black;
 }
 
-#restart {
-	font-family: 'Lumos';
-	font-size: 22px;
+.defender-character {
+	border-color: #ffffff;
+	background-color: black;
+	color: white;
 }
 
-#whathappens {
-	background-color: #99b4c7;
-	font-family: sans-serif;
-}
-
-#winsloses {
-	background-color: #99b4c7;
-	opacity: 0.7;
-	font-family: sans-serif;
-	float: right;
-	margin-right: 50px;
-	margin-top: 20px;
-	padding: 20px;
+#game-message {
+	font-size: 2em;
+	font-weight: bold;
+	color: black;
+	text-shadow: 2px 1px #e68a00;
 }

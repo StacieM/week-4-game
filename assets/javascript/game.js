@@ -1,153 +1,299 @@
+// ----- Global Variables ----- //
+
+// Has the user selected their character
+var characterSelected = false;
+
+// Has the user selected the defender
+var defenderSelected = false;
+
+// Variable to store the user's chosen character
+var character = {};
+
+// Variable to store the chosen enemy
+var defender = {};
+
+// Number of enemies defeated
+var enemiesDefeated = 0;
+
+// Boolean to indicate whether or not the game is over
+gameOver = false;
+
+// ----- Character Objects ----- //
+
+var korath = {
+  name: "korath",
+  health: 120,
+  baseAttack: 8,
+  attack: 8
+};
+
+var starlord = {
+  name: "starlord",
+  health: 100,
+  baseAttack: 5,
+  attack: 5
+};
+
+var drax = {
+  name: "drax",
+  health: 150,
+  baseAttack: 20,
+  attack: 20
+};
+
+var ronan = {
+  name: "ronan",
+  health: 180,
+  baseAttack: 25,
+  attack: 25
+};
+
+// ----- Helper Functions ----- //
+
+// This function will initialize the character value from the global object variables defined above
+function initializeCharacter(chosenCharacter) {
+  character.name = chosenCharacter.name;
+  character.health = chosenCharacter.health;
+  character.baseAttack = chosenCharacter.baseAttack;
+  character.attack = chosenCharacter.attack;
+}
+
+// This function will initialize the enemy's value from the global object variables defined above
+function initializeDefender(chosenDefender) {
+  defender.name = chosenDefender.name;
+  defender.health = chosenDefender.health;
+  defender.baseAttack = chosenDefender.baseAttack;
+  defender.attack = chosenDefender.attack;
+}
+
+// This function will move the remaining characters to the enemies section
+function moveToEnemies() {
+  $(".available-character").removeClass("available-character").addClass("enemy-character");
+  $("#enemies-available").append($(".enemy-character"));
+}
+
+// This function will reset the state of the game
+function resetGame() {
+  // Reset all the health values to the original
+  $("#korath-character").children(".health").html(korath.health);
+  $("#starlord-character").children(".health").html(starlord.health);
+  $("#drax-character").children(".health").html(drax.health);
+  $("#ronan-character").children(".health").html(ronan.health);
+
+  $(".character-image").removeClass("chosen-character enemy-character defender-character").addClass("available-character");
+  var available = $(".available-character").show();
+  $("#characters-available").html(available);
+
+  $("#game-message").empty();
+  $("#restart").hide();
+
+  characterSelected = false;
+  defenderSelected = false;
+  enemiesDefeated = 0;
+  gameOver = false;
+
+  character = {};
+  defender = {};
+}
+
+// ----- Main Routine ----- //
+
+// Run Javascript when the HTML has finished loading
 $(document).ready(function() {
-	var myChar, opponentChar, choices, enemyArray, haveCharacter, haveAttacker, numEnemies, rounds;	//Set Global Variables
-	var wins = 0;
-	var loses = 0;
 
-	function varSet() {		//Sets all of the variable values
-		myChar;
-		opponentChar;
+  // Hide the "Restart" button on document load
+  $("#restart").hide();
 
-		choices = [];
-		enemyArray = [ {
-			id: 0,
-			name: "Korath",
-			pic: 'assets/images/korath.jpeg',
-			hitPoints: 150,
-			attackPower: 5
-		}, {
-			id: 1,
-			name: "Drax",
-			pic: 'assets/images/drax.jpeg',
-			hitPoints: 100,
-			attackPower: 25 		
-		}, {
-			id: 2,
-			name: "Ronan",
-			pic: 'assets/images/ronan.jpeg',
-			hitPoints: 120,
-			attackPower: 19 
-		}, {
-			id: 3,
-			name: "Starlord",
-			pic: 'assets/images/starlord.jpeg',
-			hitPoints: 140,
-			attackPower: 9 
-		} ];
+  // Determine which character the user has clicked
+  $("#korath-character").on("click", function () {
+    console.log("korath is selected");
 
-		haveCharacter = false;
-		haveAttacker = false;
-		numEnemies = 3;
-		rounds = 7;
+    // User is choosing the character
+    if(characterSelected == false) {
+      $("#game-message").empty();
 
-		for(var i = 0; i < enemyArray.length; i++) {
-			choices += "<div id=" + enemyArray[i].id + " class='btn character text-center' value=" + enemyArray[i].id +
-			"><img class='houses' src=" + enemyArray[i].pic + " alt=" + enemyArray[i].name + "><br> HP: " + enemyArray[i].hitPoints +
-			"<br> AP: " + enemyArray[i].attackPower + " </div>";
-		}
+      // Set the user's character
+      initializeCharacter(korath);
+      characterSelected = true;
 
-		$("#picking").html(choices);
-		$("#todo").html("Click to choose your character");
+      // Display the chosen character
+      $("#korath-character").removeClass("available-character").addClass("chosen-character");
+      $("#chosen-character").append(this);
 
-		$('.hero').remove();
-		$('.fighting').remove();
-		$('#whathappens').html("");
+      // Move the remaining characters to the enemies section
+      moveToEnemies();
+    } else if ((characterSelected == true) && (defenderSelected == false)) {
+      // User is choosing the defender
+      if($("#korath-character").hasClass("enemy-character")) {
+        $("#game-message").empty();
 
-		attachCharacterOnClick();
-	}
+        // Set the user's enemy
+        initializeDefender(korath);
+        defenderSelected = true;
 
-	function printCharacters() {
-		var hero = "<div id=" + enemyArray[myChar].id + " class='btn character text-center hero' value=" + enemyArray[myChar].id +
-			"><img class='houses' src=" + enemyArray[myChar].pic + " alt=" + enemyArray[myChar].name + "><br> HP: " + enemyArray[myChar].hitPoints +
-			"<br> AP: " + enemyArray[myChar].attackPower + " </div>";
-		var badguy = "<div id=" + enemyArray[opponentChar].id + " class='btn character text-center fighting' value=" + enemyArray[opponentChar].id +
-			"><img class='houses' src=" + enemyArray[opponentChar].pic + " alt=" + enemyArray[opponentChar].name + "><br> HP: " + enemyArray[opponentChar].hitPoints +
-			"<br> AP: " + enemyArray[opponentChar].attackPower + " </div>";
-		$('#myguy').html(hero);
-		$('#enemy').html(badguy);
-	}
+        // Add the character to the defender section
+        $("#korath-character").removeClass("enemy-character").addClass("defender-character");
+        $("#defender-section").append(this);
+      }
+    }
+  });
 
-	function whatHappens() {
-		var description = "You attack " + enemyArray[opponentChar].name + " for " + enemyArray[myChar].attackPower + " damage!<br>" +
-			enemyArray[opponentChar].name + " counter attacks for " + enemyArray[opponentChar].attackPower + " damage!<br>" +
-			"Your attack power has increased by " + rounds + "!";
-		$('#whathappens').html(description);
-	}
+  $("#starlord-character").on("click", function () {
+    console.log("Starlord is selected");
 
-	function attachCharacterOnClick() {
-		$('.character').on("click", function(){
-			if(!haveCharacter) {	//Picking your character
-				myChar = $(this).attr('id');
-				$("#myguy").append(this);
-				$(this).addClass("hero");
+    // User is choosing the character
+    if(characterSelected == false) {
+      $("#game-message").empty();
 
-				haveCharacter = true;
-				$('#whathappens').html("");
-				$("#todo").html("Choose your opponent!");
-			}
-			//You have a character and you're picking your opponent
-			else if(!haveAttacker && haveCharacter && myChar !== $(this).attr('id')) {	
-				opponentChar = $(this).attr('id');
-				$("#enemy").append(this);
-				$(this).addClass("fighting");
+      // Set the user's character
+      initializeCharacter(starlord);
+      characterSelected = true;
 
-				haveAttacker = true;
-				$('#whathappens').html("");
-				$("#todo").html("Keep clicking attack to duel!");
-			}
-		});
-	}
+      // Display the chosen character
+      $("#starlord-character").removeClass("available-character").addClass("chosen-character");
+      $("#chosen-character").append(this);
 
-	$('#attack').on("click", function() {
-		if(!haveCharacter) {
-			$('#whathappens').html("You need to pick your attacker first!");
-		}
-		else if(!haveAttacker) {
-			$('#whathappens').html("Pick who you are fighting!");
-		}
-		else if(haveCharacter && haveAttacker) {
-			rounds++;
-			enemyArray[opponentChar].hitPoints  = enemyArray[opponentChar].hitPoints - enemyArray[myChar].attackPower;	//Hit Them
-			enemyArray[myChar].hitPoints = enemyArray[myChar].hitPoints - enemyArray[opponentChar].attackPower;	//Get Hit
+      // Move the remaining characters to the enemies section
+      moveToEnemies();
+    } else if ((characterSelected == true) && (defenderSelected == false)) {
+      // User is choosing the defender
+      if($("#starlord-character").hasClass("enemy-character")) {
+        $("#game-message").empty();
 
+        // Set the user's enemy
+        initializeDefender(starlord);
+        defenderSelected = true;
 
-			if(enemyArray[opponentChar].hitPoints < 0) {
-				numEnemies--;
-				if(numEnemies > 0) {
-					$(".fighting").remove();
-					$('#whathappens').html("");
-					$("#todo").html("Who will you duel next?");
-					haveAttacker = false;
-				}
-				else {
-					whatHappens();
-					alert("You win!  Play again!");
-					wins++;
-					$('#winsloses').html("Overall Wins: " + wins + "&nbsp;&nbsp;Loses: " + loses);
-					varSet();
-				}
-				
-			}
-			else if(enemyArray[myChar].hitPoints < 0) {
-				whatHappens();
-				alert("You have been defeated!  Try again!");
-				loses++;
-				$('#winsloses').html("Overall Wins: " + wins + "&nbsp;&nbsp;Loses: " + loses);
-				varSet();
-			}
-			else {
-				whatHappens();
-				printCharacters();
-			}
+        // Add the character to the defender section 
+        $("#starlord-character").removeClass("enemy-character").addClass("defender-character");
+        $("#defender-section").append(this);
+      }
+    }
+  });
 
-			enemyArray[myChar].attackPower = enemyArray[myChar].attackPower + rounds;	//Get Stronger
-		}
-	});
+  $("#drax-character").on("click", function () {
+    console.log("drax is selected");
 
-	$('#restart').on("click", function(){
-		varSet();
-	});
+    // User is choosing the character
+    if(characterSelected == false) {
+      $("#game-message").empty();
 
-	attachCharacterOnClick();
-	varSet();
+      // Set the user's character
+      initializeCharacter(drax);
+      characterSelected = true;
 
-});
+      // Display the chosen character
+      $("#drax-character").removeClass("available-character").addClass("chosen-character");
+      $("#chosen-character").append(this);
+
+      // Move the remaining characters to the enemies section
+      moveToEnemies();
+    } else if ((characterSelected == true) && (defenderSelected == false)) {
+      // User is choosing the defender
+      if($("#drax-character").hasClass("enemy-character")) {
+        $("#game-message").empty();
+
+        // Set the user's enemy
+        initializeDefender(drax);
+        defenderSelected = true;
+
+        // Add the character to the defender section 
+        $("#drax-character").removeClass("enemy-character").addClass("defender-character");
+        $("#defender-section").append(this);
+      }
+    }
+  });
+
+  $("#ronan-character").on("click", function () {
+    console.log("ronan is selected");
+
+    // User is choosing the character
+    if(characterSelected == false) {
+      $("#game-message").empty();
+
+      // Set the user's character
+      initializeCharacter(ronan);
+      characterSelected = true;
+
+      // Display the chosen character
+      $("#ronan-character").removeClass("available-character").addClass("chosen-character");
+      $("#chosen-character").append(this);
+
+      // Move the remaining characters to the enemies section
+      moveToEnemies();
+    } else if ((characterSelected == true) && (defenderSelected == false)) {
+      // User is choosing the defender
+      if($("#ronan-character").hasClass("enemy-character")) {
+        $("#game-message").empty();
+
+        // Set the user's enemy
+        initializeDefender(ronan);
+        defenderSelected = true;
+
+        // Add the character to the defender section 
+        $("#ronan-character").removeClass("enemy-character").addClass("defender-character");
+        $("#defender-section").append(this);
+      }
+    }
+  });
+
+  $("#attack").on("click", function() {
+    console.log("Attack selected");
+
+    console.log("character = " + JSON.stringify(character));
+    console.log("defender = " + JSON.stringify(defender));
+
+    // User is ready to attack the defender
+    if (characterSelected && defenderSelected && !gameOver) {
+      // User attacks the defender and decreases the defender's health points
+      defender.health = defender.health - character.attack;
+      $(".defender-character").children(".health").html(defender.health);
+      $("#game-message").html("<p>You attacked " + defender.name + " for " + character.attack + " damage.<p>");
+
+      // User's attack power increases
+      character.attack = character.attack + character.baseAttack;
+
+      // If defender is still alive, they counter attack the user
+      if (defender.health > 0) {
+        character.health = character.health - defender.baseAttack;
+        $(".chosen-character").children(".health").html(character.health);
+
+        // Check if the user survives the attack
+        if (character.health > 0) {
+          $("#game-message").append("<p>" + defender.name + " attacked you back for " + defender.baseAttack + " damage.</p>");
+        } else {
+          gameOver = true;
+          $("#game-message").html("<p>You were defeated...</p><p>Play again?</p>");
+          $("#restart").show();
+        }
+      } else {
+        // Defender is defeated
+        enemiesDefeated++;
+        defenderSelected = false;
+        $("#game-message").html("<p>You have defeated " + defender.name + ". Choose another enemy.</p>");
+        $(".defender-character").hide();
+
+        // Check if the user has won the game
+        if (enemiesDefeated === 3) {
+          gameOver = true;
+          $("#game-message").html("<p>You have won the game!!!</p><p>Play again?</p>");
+          $("#restart").show();
+        }
+      }
+    } else if (!characterSelected && !gameOver) {
+      $("#game-message").html("<p>You must first select your game character.</p>");
+    } else if (!defenderSelected && !gameOver) {
+      $("#game-message").html("<p>You must choose an enemy to fight.</p>");
+    }
+
+    console.log("character = " + JSON.stringify(character));
+    console.log("defender = " + JSON.stringify(defender));
+  });
+
+  $("#restart").on("click", function() {
+    console.log("Restart selected");
+
+    resetGame();
+  });
+
+}); // Main routine
