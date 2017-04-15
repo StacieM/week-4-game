@@ -15,6 +15,9 @@ var defender = {};
 // Number of enemies defeated
 var enemiesDefeated = 0;
 
+// play song when win game
+var audio = new Audio("assets/audio/Hooked.mp3");
+
 // Boolean to indicate whether or not the game is over
 gameOver = false;
 
@@ -277,6 +280,7 @@ $(document).ready(function() {
         if (enemiesDefeated === 3) {
           gameOver = true;
           $("#game-message").html("<p>You have won the game!!!</p><p>Play again?</p>");
+          audio.play();
           $("#restart").show();
         }
       }
