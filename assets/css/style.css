@@ -1,6 +1,6 @@
 body {
 	font-family: 'Bungee';
-	background-image: url('guardiansofgalaxy.jpeg');
+	background-image: url('../images/guardiansofgalaxy.jpeg');
     -webkit-background-size: cover;
     -moz-background-size: cover;
     background-size: cover;
